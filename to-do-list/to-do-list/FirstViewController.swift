@@ -17,7 +17,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     let defaults = UserDefaults.standard;
-    var list = [Item]();
+    var tasks = [Item]();
+    var completeTasks = [Item]();
     @IBOutlet weak var tableList: UITableView!
 
     @IBAction func addItem(_ sender: Any) {
@@ -29,49 +30,64 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let textField = alert?.textFields![0];
             print("Text field: \(textField?.text ?? "")")
             if (textField?.text?.count)! > 0 {
-                let item = Item(title: (textField?.text)!, completed: true);
-                self.list.append(item);
+                let item = Item(title: (textField?.text)!, completed: false)
+                self.tasks.append(item);
                 do {
-                    let itemData = try JSONEncoder().encode(self.list)
-                    UserDefaults.standard.set(itemData, forKey: "list")
+                    let itemData = try JSONEncoder().encode(self.tasks)
+                    UserDefaults.standard.set(itemData, forKey: "tasks")
                 } catch {
                     print(error)
                 }
                 self.tableList.reloadData();
             }
         }))
-        self.present(alert, animated: true, completion: nil);
+        self.present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count;
+        print(tasks.count)
+        return tasks.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell");
-        cell.textLabel?.text = (list[indexPath.row]).title;
+        cell.textLabel?.text = (tasks[indexPath.row]).title;
         cell.backgroundColor = UIColor (red: 0.18, green: 0.71, blue: 1.0, alpha: 1.0);
         return cell;
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            self.list.remove(at: indexPath.row);
+            self.tasks[indexPath.row].completed = true
+            completeTasks.append(tasks[indexPath.row]);
+            self.tasks.remove(at: indexPath.row);
+            do {
+                let itemData = try JSONEncoder().encode(self.tasks)
+                let itemData2 = try JSONEncoder().encode(self.completeTasks)
+                UserDefaults.standard.set(itemData, forKey: "tasks")
+                UserDefaults.standard.set(itemData2, forKey: "completeTasks")
+            } catch {
+                
+                print(error)
+            }
             tableList.reloadData();
         }
         
     }
     override func viewDidLoad() {
+        //Load
         super.viewDidLoad()
-        guard let data = UserDefaults.standard.data(forKey: "list") else {
-            self.list = []
+        
+        //Current Tasks
+        guard let data = UserDefaults.standard.data(forKey: "tasks") else {
+            self.tasks = []
             return
         }
         do {
-            self.list = try JSONDecoder().decode([Item].self, from: data)
+            self.tasks = try JSONDecoder().decode([Item].self, from: data)
         } catch {
             print(error)
-            self.list = []
+            self.tasks = []
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA216E8121D69B570096E725 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA216E8021D69B560096E725 /* CompletedViewController.swift */; };
 		EADC675B21B1D36C0086AEB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADC675A21B1D36C0086AEB9 /* AppDelegate.swift */; };
 		EADC675D21B1D36C0086AEB9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADC675C21B1D36C0086AEB9 /* FirstViewController.swift */; };
 		EADC675F21B1D36C0086AEB9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADC675E21B1D36C0086AEB9 /* SecondViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA216E8021D69B560096E725 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		EADC675721B1D36C0086AEB9 /* to-do-list.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "to-do-list.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADC675A21B1D36C0086AEB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADC675C21B1D36C0086AEB9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				EADC675C21B1D36C0086AEB9 /* FirstViewController.swift */,
 				EADC675E21B1D36C0086AEB9 /* SecondViewController.swift */,
 				EADC676021B1D36C0086AEB9 /* Main.storyboard */,
+				EA216E8021D69B560096E725 /* CompletedViewController.swift */,
 				EADC676321B1D36D0086AEB9 /* Assets.xcassets */,
 				EADC676521B1D36D0086AEB9 /* LaunchScreen.storyboard */,
 				EADC676821B1D36D0086AEB9 /* Info.plist */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA216E8121D69B570096E725 /* CompletedViewController.swift in Sources */,
 				EADC675F21B1D36C0086AEB9 /* SecondViewController.swift in Sources */,
 				EADC675B21B1D36C0086AEB9 /* AppDelegate.swift in Sources */,
 				EADC675D21B1D36C0086AEB9 /* FirstViewController.swift in Sources */,
