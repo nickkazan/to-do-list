@@ -71,6 +71,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fV-r8-hVH">
+                                <rect key="frame" x="0.0" y="577" width="375" height="30"/>
+                                <state key="normal" title="completed"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -78,13 +82,16 @@
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
                             <constraint firstItem="6cb-oY-ZoJ" firstAttribute="top" secondItem="9am-pO-7TM" secondAttribute="bottom" id="EYt-02-jGB"/>
                             <constraint firstItem="6cb-oY-ZoJ" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="HQA-8h-8aO"/>
+                            <constraint firstItem="9fV-r8-hVH" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="NLu-1b-VWH"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
+                            <constraint firstAttribute="bottom" secondItem="9fV-r8-hVH" secondAttribute="bottom" constant="60" id="kqR-Lt-p4W"/>
                             <constraint firstItem="9am-pO-7TM" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="pSF-ba-qKo"/>
                             <constraint firstItem="9am-pO-7TM" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="qL0-EF-D9r"/>
                             <constraint firstItem="6cb-oY-ZoJ" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="s6Y-fy-eiq"/>
                             <constraint firstItem="9am-pO-7TM" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="syO-Hm-qUa"/>
+                            <constraint firstAttribute="trailing" secondItem="9fV-r8-hVH" secondAttribute="trailing" id="yUO-zm-4XJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
@@ -142,10 +149,11 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.18039215689999999" green="0.70980392160000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>

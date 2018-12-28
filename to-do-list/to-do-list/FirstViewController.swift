@@ -10,34 +10,34 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    struct Items{
+    struct Item: Codable {
         
-        var title : String!
-        var completed : Bool!
-        
-        init(title: String, completed: Bool) {
-            self.title = title
-            self.completed = completed
-        }
+        var title : String
+        var completed : Bool
     }
     
     let defaults = UserDefaults.standard;
-    var list = [Items]()
+    var list = [Item]();
     @IBOutlet weak var tableList: UITableView!
 
     @IBAction func addItem(_ sender: Any) {
         let alert = UIAlertController(title: "Add an item", message: "", preferredStyle: .alert);
         alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Enter Task"
+            textField.placeholder = "Enter Task";
         })
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0];
             print("Text field: \(textField?.text ?? "")")
             if (textField?.text?.count)! > 0 {
-                let item = Items(title: (textField?.text)!, completed: true);
+                let item = Item(title: (textField?.text)!, completed: true);
                 self.list.append(item);
+                do {
+                    let itemData = try JSONEncoder().encode(self.list)
+                    UserDefaults.standard.set(itemData, forKey: "list")
+                } catch {
+                    print(error)
+                }
                 self.tableList.reloadData();
-                self.defaults.set(self.list, forKey: "list");
             }
         }))
         self.present(alert, animated: true, completion: nil);
@@ -49,7 +49,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell");
-        cell.textLabel?.text = list[indexPath.row].title;
+        cell.textLabel?.text = (list[indexPath.row]).title;
         cell.backgroundColor = UIColor (red: 0.18, green: 0.71, blue: 1.0, alpha: 1.0);
         return cell;
     }
@@ -63,12 +63,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        list = defaults.object(forKey: "list") as? [Items] ?? [Items]();
-
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        guard let data = UserDefaults.standard.data(forKey: "list") else {
+            self.list = []
+            return
+        }
+        do {
+            self.list = try JSONDecoder().decode([Item].self, from: data)
+        } catch {
+            print(error)
+            self.list = []
+        }
     }
-
-
 }
-
