@@ -89,5 +89,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(error)
             self.tasks = []
         }
+        guard let dataCompleted = UserDefaults.standard.data(forKey: "completeTasks") else {
+            self.completeTasks = []
+            return
+        }
+        do {
+            self.completeTasks = try JSONDecoder().decode([Item].self, from: dataCompleted)
+        } catch {
+            print(error)
+            self.completeTasks = []
+        }
     }
 }
