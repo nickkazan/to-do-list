@@ -18,9 +18,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     let defaults = UserDefaults.standard;
     var tasks = [Item]();
+    var buttonStatus = 1;
     var completeTasks = [Item]();
     @IBOutlet weak var tableList: UITableView!
-
+    
+    
     @IBAction func addItem(_ sender: Any) {
         let alert = UIAlertController(title: "Add an item", message: "", preferredStyle: .alert);
         alert.addTextField(configurationHandler: { (textField) in
@@ -49,10 +51,35 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return tasks.count;
     }
     
+    //Toggle the star button
+    @objc func starClicked(_ sender:UIButton) {
+        if buttonStatus == 1 {
+            sender.setImage(UIImage(named: "starC.png"), for: .normal)
+            buttonStatus = 0
+        }
+        else if buttonStatus == 0 {
+            sender.setImage(UIImage(named: "starU.png"), for: .normal)
+            buttonStatus = 1
+        }
+    }
+
+    //Handle the button and text
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell");
-        cell.textLabel?.text = (tasks[indexPath.row]).title;
+        let label = UILabel(frame: CGRect(x: 60, y: 0, width: 100, height: 30))
+        let cellButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        label.text = tasks[indexPath.row].title
+        label.tag = indexPath.row
+        cell.contentView.addSubview(label)
+        cellButton.frame = CGRect(x: 10, y: 0, width: 30, height: 30);
+        cellButton.setImage(UIImage(named: "starU.png"), for: .normal)
+        cellButton.addTarget(self, action: #selector(starClicked), for: .touchUpInside)
+
+        cell.contentView.addSubview(cellButton);
+
+        
         cell.backgroundColor = UIColor (red: 0.18, green: 0.71, blue: 1.0, alpha: 1.0);
+        
         return cell;
     }
     
